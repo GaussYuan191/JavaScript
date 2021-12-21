@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字对象</title>
+</head>
+<body>
+    <script>
+        let log = console.log
+        // isFinite 监测指定参数是否为无穷大
+        // 如果number是NaN(非数字)，或是正、负无穷的数，则返回false
+        // Number.isFinite(123) //true
+        // Number.isFinite(-1.23) //true
+        // Number.isFinite(5-2) //true
+        // Number.isFinite(0) //true
+        // Number.isFinite('123') //false
+        // Number.isFinite('Hello') //false
+        // Number.isFinite('2005/12/12') //false
+        // Number.isFinite(Infinity) //false
+        // Number.isFinite(-Infinity) //false
+        // Number.isFinite(0 / 0) //false
+
+        // toExponential() 方法可把对象的值转换成指数计数法。
+        // number.toExponential(x) x 为 0-20
+        // log(5.12352.toExponential(3)) 5.124e+0
+
+        // toFixed() 把number四舍五入为指定小数位数的数字
+        // number.toFixed(x) x 为 0-20
+        // var num = 5.56789;
+        // var n=num.toFixed(1);
+        // log(n)
+
+        // toPrecision() 方法返回指定长度的数值字符串。
+        // number.toPrecision(x) 
+        // var num = new Number(13.3714);
+        // var a = num.toPrecision();
+        // var b = num.toPrecision(2);
+        // var c = num.toPrecision(3);
+        // var d = num.toPrecision(10);
+        // log(a, b, c, d)
+
+        // es6 新增 Number.isInteger() //用来判断给定的阐述是否为整数
+        // Number.isInteger(10);        // 返回 true
+        // Number.isInteger(10.5);      // 返回 false
+        // Number.isSafeInteger() 判断传入的参数值是否为一个"安全整数"
+        //  -(2^53 - 1)到 2^53 - 1 之间的整数，包含 -(2^53 - 1)和 2^53 - 1。
+    </script>
+</body>
+</html>
