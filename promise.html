@@ -49,16 +49,118 @@
         // p2
         // .then(result => console.log(result))
         // .catch(error => console.log(error))
-        Promise.any([
-  fetch('https://v8.dev/').then(() => 'home'),
-  fetch('https://v8.dev/blog').then(() => 'blog'),
-  fetch('https://v8.dev/docs').then(() => 'docs')
-]).then((first) => {  // 只要有一个 fetch() 请求成功
-  console.log(first);
-}).catch((error) => { // 所有三个 fetch() 全部请求失败
-  console.log(error);
-})
         
+        
+        // var promise = new Promise((resolve, reject) => {
+        //         throw new Error('白嫖不成功')
+        // })
+        // promise.then((data) => {
+
+        // console.log(data);
+        // }, (data) => {
+        // console.log(data);
+        // })
+        
+        class Commitment {
+          static pending = 'pending'; static fulfilled = 'fulfilled';
+          static rejected = 'reject';
+          constructor (func) {
+            this.status = Commitment.pending;
+            this.result = null;
+            this.resolveCallbacks = [];
+            this.rejectCallbacks = [];
+            try {
+              func(this.resolve.bind(this), this.reject.bind(this));
+            } catch ( error ) {
+              this.reject(error);
+            }
+          }
+          resolve (result) {
+            
+              if (this.status === Commitment.pending) {
+              this.status = Commitment.fulfilled;
+              this.result = result;
+              // 遇到resolve 它的状态就改变了 
+              setTimeout(() => {
+                this.resolveCallbacks.forEach(callback => callback(result));
+              })
+             }
+           
+          }
+          reject (result) {
+
+         
+              if (this.status === Commitment.pending) {
+              this.status = Commitment.rejected;
+              this.result = result;
+              setTimeout(() => {
+                this.rejectCallbacks.forEach(callback => callback(result));
+              })
+             
+            
+            }
+          }
+          then(onFulfilled, onRejected) {
+            return new Commitment((resolve, reject) => {
+              onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : () => {};
+              onRejected = typeof onRejected === 'function' ? onRejected : () => {};
+              if (this.status === Commitment.pending) {
+                this.resolveCallbacks.push(onFulfilled);
+                this.rejectCallbacks.push(onRejected);
+              }
+              if (this.status === Commitment.fulfilled) {
+                setTimeout(() => {
+                  // onFulfilled(this.result);
+                  console.log(this,"kljdpo")
+                  let value = onFulfilled(this.result);
+                  
+                  resolve(value)
+                });
+              }
+              if (this.status === Commitment.reject) {
+                setTimeout(() => {
+                  onRejected(this.result);
+                })
+              }
+              })
+          }   
+        }
+
+        var log = console.log;
+        log("第一步");
+        var commitment = new Commitment((resolve, reject) => {
+          log('第二步')
+          setTimeout(() => {
+            resolve('这次一定');
+            // reject('下次一定')
+            log('第四步')
+          })
+        })
+        commitment.then(
+          result => {
+          
+            log(result)
+          },
+          result => log(result.message)
+        ).then(
+          result => {
+            log(result)
+            log("1111skjdhii")
+          },
+          result => log(result.message)
+        )
+        log('第三步')
+        // const promise1 = new Commitment((resolve, reject) => {
+        //   console.log('promise1')
+        //   resolve('resolve1')
+        // })
+        // const promise2 = promise1.then(res => {
+        //   console.log(res)
+        // })
+        // console.log('1', promise1);
+        // console.log('2', promise2);
+
     </script>
+    
 </body>
 </html>
