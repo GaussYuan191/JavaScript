@@ -90,7 +90,7 @@
     //         setTimeout(() => {
     //             if (self.state === pending) {
     //                 // 改变状态
-    //                 self.value = fulfilled;
+    //                 self.state = fulfilled;
     //                 // 设置传入的值
     //                 self.value = value;
     //                 // 执行回调函数
@@ -137,7 +137,8 @@
     //         onRejected(this.value);
     //     }
     // }
-    // log(1)
+    
+    // // log(1)
     // let p = new MyPromise((resolve, reject) => {
     //     setTimeout(() => {
     //         resolve(2);
@@ -154,75 +155,126 @@
     // 3.遍历传入的参数，用Promise.resolve()将参数"包一层"，使其变成一个promise对象
     // 4.参数所有回调成功才算成功，返回值数组与参数顺序一致
     // 5.参数数组中有一个失败，则触发失败，第一个触发失败的promise错误信息作为promise.all的错误信息
-    function promiseAll (promises) {
-        return new Promise((resolve, reject) => {
-            // 先判断参数类型
-            if (!Array.isArray(promises)) {
-                throw new TypeError(`argument must be a array`);
-            }
-            var resolvedResult = [];
-            var resolvedCount = 0;
-            var resolvedNum = promises.length;
-            for (let i = 0; i < resolvedNum; i++) {
-                log(promises[i])
-                Promise.resolve(promises[i]).then(value => {
-                    resolvedCount++;
-                    log(value)
-                    resolvedResult.push(value);
-                    if (resolvedCount == resolvedNum) {
-                        return resolve(resolvedResult);
-                    }
-                }, error => {
-                    return reject(error);
-                })
-            }
-        })
-    } 
+    // function promiseAll (promises) {
+    //     return new Promise((resolve, reject) => {
+    //         // 先判断参数类型
+    //         if (promises != null && typeof promises[Symbol.iterator] === 'function') {
+    //             throw new TypeError(`argument must be a array`);
+    //         }
+    //         var resolvedResult = [];
+    //         var resolvedCount = 0;
+    //         var resolvedNum = promises.length;
+    //         for (let i = 0; i < resolvedNum; i++) {
+    //             log(promises[i])
+    //             Promise.resolve(promises[i]).then(value => {
+    //                 resolvedCount++;
+    //                 log(value)
+    //                 resolvedResult.push(value);
+    //                 if (resolvedCount == resolvedNum) {
+    //                     return resolve(resolvedResult);
+    //                 }
+    //             }, error => {
+    //                 return reject(error);
+    //             })
+    //         }
+    //     })
+    // } 
     // Promise.race() 接收一个promise对象的数组作为参数，并返回一个新的promise对象
     // 数组中有一个对象最早改变状态(resolve, reject)时，就改变自身的状态,并执行响应回调
-    function promiseRace (promises) {
-        // 类型必需是数组类型
-        if (!Array.isArray(promises)) {
-            throw new TypeError(`argument must be a array`)
-        }
-        return new Promise((resolve, reject) => {
-            promises.forEach( p => {
-                Promise.resolve(p).then( value => {
-                    resolve(value);
-                }, error => {
-                    reject(error);
-                })
-            })
-        })
-    }
-    // test 
-    let p1 = new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(1);
-        }, 4000);
-    })
-    let p2 = new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(2);
-        }, 2000);
-    })
-    let p3 = new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(3);
-        }, 3000);
-    })
+    // function promiseRace (promises) {
+    //     // 类型必需是数组类型
+    //     if (promises !== null && promises[Symbol.iterator] === 'function') {
+    //         throw new TypeError(`argument must be a array`)
+    //     }
+    //     return new Promise((resolve, reject) => {
+    //         promises.forEach( p => {
+    //             Promise.resolve(p).then( value => {
+    //                 resolve(value);
+    //             }, error => {
+    //                 reject(error);
+    //             })
+    //         })
+    //     })
+    // }
+    // promise.prototype.catch
+    //    function promiseCatch(onRejected) {
+    //        return this.then(null, onRejected);
+    //    }
+    // promise.prototype.finally 无论成功或者失败都会执行finally
+    // function promiseFinally (onResolved) {
+    //     return this.then(val => {
+    //         onResolved();
+    //         return val;
+    //     }).catch(err => {
+    //         onResolved();
+    //         return err;
+    //     }) 
+    // }
+    // Promise.resolve
+    //    promiseResolve = function (val) {
+    //        return new Promise(resolve => {
+    //            resolve(val);
+    //        })
+    //    }
+    // promise.any 的应用场景 从最快的服务器上检索资源
+    // function promiseAny(promises) {
+    //     let isIterable = params => typeof params[Symbol.iterator] === 'function'
+    //     return new Promise((resolve, reject) => {
+    //         if (!isIterable(promises)) {
+    //             reject(new TypeError(`${promsies} is not iterables !`))
+    //         } else {
+    //             if (promises.length === 0) {
+    //                 reject('AggregateError: All promise were rejected')
+    //             } else {
+    //                 let count = 0;
+    //                 for (let i = 0; i < promises.length; i++) {
+    //                     Promise.resolve(promises[i]).then(resolve, errs => {
+    //                         count++;
+    //                         if (count === promises.length) reject('AggregateError: All promsie were rejected')
+    //                     })
+    //                 }
+    //             }
+    //         }
+    //     })
+    // } 
+    // // test 
+    // let p1 = new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         resolve(1);
+    //     }, 4000);
+    // })
+    // let p2 = new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         resolve(2);
+    //     }, 2000);
+    // })
+    // let p3 = new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         resolve(3);
+    //     }, 3000);
+    // })
     // promiseAll([1, 2, 3]).then(res => {
     //     log(res);
     // })
     // Promise.all([1, 2, 3]).then(res => {
     //     log(res);
     // })
-    promiseRace(new Set(1, 2, 3)).then( res => {
-        log(res);
-    })
-    Promise.race(new Set(1, 2, 3)).then( res => {
-        log(res);
-    })
+    // promiseRace(new Set(1, 2, 3)).then( res => {
+    //     log(res);
+    // })
+    // Promise.race(new Set(1, 2, 3)).then( res => {
+    //     log(res);
+    // })
+    //  promiseAny(new Map()).then(res => {
+    //      log(res);
+    //  }, err => {
+    //      log(err)
+    //  })
+    //  Promise.any(new Map()).then(res => {
+    //      log(res);
+    //  }, err => {
+    //      log(err)
+    //  })
     // 数据处理
     // 1.实现日期格式化函数
     //     const dateFormat = (dateInput, format)=>{
@@ -237,6 +289,79 @@
     // log(dateFormat(new Date('2020-12-01'), 'yyyy/MM/dd')) // 2020/12/01
     // dateFormat(new Date('2020-04-01'), 'yyyy/MM/dd') // 2020/04/01
     // log(dateFormat(new Date('2020-04-01'), 'yyyy年MM月dd日')) // 2020年04月01日
+    // function deepCopy(object) {
+    //     if (!object || typeof object != 'object') return null;
+    //     let newObject = Array.isArray(object) ? [] : {};
+    //     for (let key in object) {
+    //         if (object.hasOwnProperty(key)) {
+    //             newObject[key] = typeof object[key] == 'object' ? deepCopy(object[key]) : object[key];
+    //         }
+    //     }
+    //     return newObject;
+    // }
+    // var deepObj = {
+    //     a:'22',
+    //     b: undefined,
+    //     c: function() {
+    //         console.log('this a', this.a);
+    //     }
+
+    // }
+    // const a = {
+    //         i: Infinity,
+    //         s: "",
+    //         bool: false,
+    //         n: null,
+    //         u: undefined,
+    //         sym: Symbol(),
+    //         obj: {
+    //           i: Infinity,
+    //           s: "",
+    //           bool: false,
+    //           n: null,
+    //           u: undefined,
+    //           sym: Symbol(),
+    //         },
+    //         array: [
+    //           {
+    //             nan: NaN,
+    //             i: Infinity,
+    //             s: "",
+    //             bool: false,
+    //             n: null,
+    //             u: undefined,
+    //             sym: Symbol(),
+    //           },
+    //           123,
+    //         ],
+    //         fn: function () {
+    //           return "fn";
+    //         },
+    //         date: new Date(),
+    //         re: /hi\d/gi,
+    //       };
+    //       let a2 = deepCopy(a);
+    //       console.log(a2 !== a);
+    //       console.log(a2.i === a.i);
+    //       console.log(a2.s === a.s);
+    //       console.log(a2.bool === a.bool);
+    //       console.log(a2.n === a.n);
+    //       console.log(a2.u === a.u);
+    //       console.log(a2.sym === a.sym);
+    //       console.log(a2.obj !== a.obj);
+    //       console.log(a2.array !== a.array);
+    //       console.log(a2.array[0] !== a.array[0]);
+    //       console.log(a2.array[0].i === a.array[0].i);
+    //       console.log(a2.array[0].s === a.array[0].s);
+    //       console.log(a2.array[0].bool === a.array[0].bool);
+    //       console.log(a2.array[0].n === a.array[0].n);
+    //       console.log(a2.array[0].u === a.array[0].u);
+    //       console.log(a2.array[0].sym === a.array[0].sym);
+    //       console.log(a2.array[1] === a.array[1]);
+    //       console.log(a2.fn !== a.fn);
+    //       console.log(a2.date !== a.date);
+    //       console.log(a2.re !== a.re);
+    
     </script>
 </body>
 </html>
