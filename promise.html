@@ -108,7 +108,9 @@
                 this.resolveCallbacks.push(onFulfilled);
                 this.rejectCallbacks.push(onRejected);
               }
+              console.log(this.status)
               if (this.status === Commitment.fulfilled) {
+                console.log('完成')
                 setTimeout(() => {
                   // onFulfilled(this.result);
                   console.log(this,"kljdpo")
@@ -136,19 +138,16 @@
             log('第四步')
           })
         })
-        commitment.then(
+        var p = commitment.then(
           result => {
           
-            log(result)
-          },
-          result => log(result.message)
-        ).then(
-          result => {
-            log(result)
-            log("1111skjdhii")
+            log('222',result)
+            console.log(commitment)
+            return result
           },
           result => log(result.message)
         )
+        
         log('第三步')
         // const promise1 = new Commitment((resolve, reject) => {
         //   console.log('promise1')
