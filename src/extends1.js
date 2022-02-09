@@ -26,3 +26,4 @@ console.log(boy1.name, boy2.name, boy1.name == boy2.name);
 boy1.arr.push(2);
 console.log(boy2.arr); // 注意修改boy1的name，boy2的name不影响
 //注意要修改child类实例的constructor的指向
+console.log(Child.prototype.__proto__ === Parent.prototype);
