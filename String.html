@@ -1,120 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>字符串对象</title>
-</head>
-<body>
+  </head>
+  <body>
     <script>
-        let log = console.log
-        // charAt() 可返回字符串指定位置的字符
-        // string.charAt(index)
-        // var str = "HELLO WORLD";
-        // var n = str.charAt(2)
-        // log(n, str[2]) // L L
+      let log = console.log;
+      // charAt() 可返回字符串指定位置的字符
+      // string.charAt(index)
+      // var str = "HELLO WORLD";
+      // var n = str.charAt(2)
+      // log(n, str[2]) // L L
 
-        // charCodeAt() 返回指定位置字符的Unicode编码
+      // charCodeAt() 返回指定位置字符的Unicode编码
 
-        // concat() 连接两个字符串， 并返回新的字符串
-        // log("aaaa".concat("bbjkshdh"))
+      // concat() 连接两个字符串， 并返回新的字符串
+      // log("aaaa".concat("bbjkshdh"))
 
-        // endsWith() 判断字符串是否以指定的字符串结尾 区分大小写
-        // let str = "Hello world";
-        // str.endsWith("world")   // 返回 true
-        // str.endsWith("World")   // 返回 false
+      // endsWith() 判断字符串是否以指定的字符串结尾 区分大小写
+      // let str = "Hello world";
+      // str.endsWith("world")   // 返回 true
+      // str.endsWith("World")   // 返回 false
 
-        // fromCharCode 将Unicode编码转为字符
+      // fromCharCode 将Unicode编码转为字符
 
-        // indexOf() 返回某个指定字符串在该字符串中首次出现的位置
-       
-        // lastIndexOf() 从后往前搜索
+      // indexOf() 返回某个指定字符串在该字符串中首次出现的位置
 
-        // match() 在字符串内检索指定的值，或找到一个或多个正则表达式
-        // var str="The rain in SPAIN stays mainly in the plain"; 
-        // var n=str.match(/ain/g);
+      // lastIndexOf() 从后往前搜索
 
-        // repeat() 复制指定次数
-        // var str = "Runoob";
-        // str.repeat(2);
+      // match() 在字符串内检索指定的值，或找到一个或多个正则表达式
+      // var str="The rain in SPAIN stays mainly in the plain";
+      // var n=str.match(/ain/g);
 
-        // replace() 用于在字符串中替换另一些字符
-        // string.replace(searchvalue,newvalue)
-        // searchvalue 必需 RegExp对象 必需 newValue 要替换的值
-        // var str="Visit Microsoft! Visit Microsoft!";
-        // var n=str.replace("Microsoft","Runoob");
+      // repeat() 复制指定次数
+      // var str = "Runoob";
+      // str.repeat(2);
 
-        // replaceAll() 替换所有匹配的字串
-        
-        // search() 用于检索字符串中指定的字符串 找到 返回起始位置 没找到返回 -1
+      // replace() 用于在字符串中替换另一些字符
+      // string.replace(searchvalue,newvalue)
+      // searchvalue 必需 RegExp对象 必需 newValue 要替换的值
+      // var str="Visit Microsoft! Visit Microsoft!";
+      // var n=str.replace("Microsoft","Runoob");
 
-        // slice() 截取字符串的某个部分， 并以新字符串返回被提取的部分
-        // var str="Hello world!";
-        // var n=str.slice(3);
-        // log(str)
+      // replaceAll() 替换所有匹配的字串
 
-        // split() 用于把字符串分隔成字符数组
-        // string.split(separator,limit)
-        // separator 可选 字符串或正则表达式 limit 分隔的数量 
-        
-        // startsWith() 查看字符串是否以特定的字串开头 大小写敏感
-        
-        // substr() 可在字符串中 抽取开始下标的指定数目的字符
-        // string.substr(start,length)
-        // start 起始位置 length 长度
-        // var str="Hello world!";
-        // var n=str.substr(2,3)
-        // log(n)
+      // search() 用于检索字符串中指定的字符串 找到 返回起始位置 没找到返回 -1
 
-        // substring() 方法用于提取字符串中介于两个指定下标之间的字符。
-        // string.substring(from, to)
-        // from 必需 to 可选 如果省略 则到字符串尾
-        // var str="Hello world!";
-        // log(str.substring(2, 7))
+      // slice() 截取字符串的某个部分， 并以新字符串返回被提取的部分
+      // var str="Hello world!";
+      // var n=str.slice(3);
+      // log(str)
 
-        // toLowerCase() 把字符串转成小写
-        // toUpperCase() 把字符串转成大写
+      // split() 用于把字符串分隔成字符数组
+      // string.split(separator,limit)
+      // separator 可选 字符串或正则表达式 limit 分隔的数量
 
-        // trim() 去掉字符串两边的空白
+      // startsWith() 查看字符串是否以特定的字串开头 大小写敏感
 
-        // valueOf() 返回某个字符串对象的原始值
+      // substr() 可在字符串中 抽取开始下标的指定数目的字符
+      // string.substr(start,length)
+      // start 起始位置 length 长度
+      // var str="Hello world!";
+      // var n=str.substr(2,3)
+      // log(n)
 
-        // var patt=new RegExp(pattern,modifiers);
-        // var patt=/pattern/modifiers;
-        // pattern 描述表达式的模式
-        // modifiers 用于指定全局匹配、区分大小写得匹配和多行匹配
+      // substring() 方法用于提取字符串中介于两个指定下标之间的字符。
+      // string.substring(from, to)
+      // from 必需 to 可选 如果省略 则到字符串尾
+      // var str="Hello world!";
+      // log(str.substring(2, 7))
 
-        // 修饰符 i 大小写不敏感 g 执行全局匹配 m 执行多行匹配
-        // g：全局模式，表示查找字符串的全部内容，而不是找到第一个匹配的内容就结束。
-        // i：不区分大小写，表示在查找匹配时忽略 pattern 和字符串的大小写。
-        // m：多行模式，表示查找到一行文本末尾时会继续查找。
-        // y：粘附模式，表示只查找从 lastIndex 开始及之后的字符串。
-        // u：Unicode 模式，启用 Unicode 匹配。
-        // s：dotAll 模式，表示元字符.匹配任何字符（包括\n 或\r）。
+      // toLowerCase() 把字符串转成小写
+      // toUpperCase() 把字符串转成大写
 
-        // RegExp exec 返回其位置 test 检索 有没有 toString 返回正则字符
-        // string search 返回其首次出现的位置
-        // match 检索 匹配的字符 返回一个数组
-        // replace 替换 replace(searchvalue,newvalue)
-        // let str = "abkkhsdakhffyjujmz ffqykiwejjk kjksiaiouff"
-        // let re = /ff/
-        // log(str.match(re),str.match(re) instanceof Array)
-        // 元字符
-        // - 查找单个字符，除了换行和行结束符
-        // \w 数字 字母 下划线 \d 查找数字 \s 查找空字符串
-        // 量词
-        // n+ 至少一个 n* 包含0个或多个 ？ 0或1
-        // n{X} X个 n{X, Y} 至少X次 至多Y次
-        // n$ 匹配 结尾为n的字符串 ^n 匹配开头为n的字符串
-        // ?=n 匹配任何其后紧接指定字符串n的字符串
-        // ?!n 匹配任何其后没有紧接指定字符串n的字符串
-        // var str = `dogdogdog dogdogdog dogdogdog
-        // dogdogdog
-        // dogdogdog`;
-        // var str2 = str.replace(new RegExp("dog$","mg"),"cat");
-        // console.log(str2);  // catcatcat
+      // trim() 去掉字符串两边的空白
 
+      // valueOf() 返回某个字符串对象的原始值
+
+      // var patt=new RegExp(pattern,modifiers);
+      // var patt=/pattern/modifiers;
+      // pattern 描述表达式的模式
+      // modifiers 用于指定全局匹配、区分大小写得匹配和多行匹配
+
+      // 修饰符 i 大小写不敏感 g 执行全局匹配 m 执行多行匹配
+      // g：全局模式，表示查找字符串的全部内容，而不是找到第一个匹配的内容就结束。
+      // i：不区分大小写，表示在查找匹配时忽略 pattern 和字符串的大小写。
+      // m：多行模式，表示查找到一行文本末尾时会继续查找。
+      // y：粘附模式，表示只查找从 lastIndex 开始及之后的字符串。
+      // u：Unicode 模式，启用 Unicode 匹配。
+      // s：dotAll 模式，表示元字符.匹配任何字符（包括\n 或\r）。
+
+      // RegExp exec 返回其位置 test 检索 有没有 toString 返回正则字符
+      // string search 返回其首次出现的位置
+      // match 检索 匹配的字符 返回一个数组
+      // replace 替换 replace(searchvalue,newvalue)
+      // let str = "abkkhsdakhffyjujmz ffqykiwejjk kjksiaiouff"
+      // let re = /ff/
+      // log(str.match(re),str.match(re) instanceof Array)
+      // 元字符
+      // - 查找单个字符，除了换行和行结束符
+      // \w 数字 字母 下划线 \d 查找数字 \s 查找空字符串
+      // 量词
+      // n+ 至少一个 n* 包含0个或多个 ？ 0或1
+      // n{X} X个 n{X, Y} 至少X次 至多Y次
+      // n$ 匹配 结尾为n的字符串 ^n 匹配开头为n的字符串
+      // ?=n 匹配任何其后紧接指定字符串n的字符串
+      // ?!n 匹配任何其后没有紧接指定字符串n的字符串
+      // var str = `dogdogdog dogdogdog dogdogdog
+      // dogdogdog
+      // dogdogdog`;
+      // var str2 = str.replace(new RegExp("dog$","mg"),"cat");
+      // console.log(str2);  // catcatcat
     </script>
-</body>
+  </body>
 </html>
