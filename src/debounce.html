@@ -1,12 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>防抖</title>
+  </head>
+  <body>
+    <input type="text" class="box" />
+    <script>
+      //   function debounce(fn, time) {
+      //     let timer = null;
+      //     return function (...args) {
+      //       if (timer) {
+      //         clearTimeout(timer);
+      //       }
+      //       timer = setTimeout(() => {
+      //         fn.apply(this, args);
+      //       }, time);
+      //     };
+      //   }
+      // 第一次执行
+      function debounce(fn, time, flag = true) {
+        let timer = null;
+        return function (...args) {
+          if (timer) {
+            clearTimeout(timer);
+          }
+          // 第一次执行
+          if (false && !timer) {
+            fn.apply(this, args);
+            flag = false;
+          }
+          timer = setTimeout(() => {
+            fn.apply(this, args);
+          }, time);
+        };
+      }
+      const box = document.querySelector(".box");
+      box.addEventListener(
+        "input",
+        debounce(function (e) {
+          console.log(e);
+        }, 500)
+      );
+    </script>
+  </body>
 </html>
