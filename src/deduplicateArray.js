@@ -1,11 +1,12 @@
 // 数组去重
 // 1 利用set
-let arr = [1, 2, 3, 3, 2, 4, 2, 7, 5, 9, NaN, NaN, +0, -0];
+let arr = [1, 2, 3, 3, 2, 4, 2, 7, 5, 9];
 let log = console.log;
 let deDuplication_set = (arr) => {
+  console.log(new Set(arr));
   return Array.from(new Set(arr));
 };
-// log(deDuplication_set(arr));
+log(deDuplication_set(arr));
 // 2 新建对象属性 + 新建数组
 // 把数组的元素当做对象的key
 let deDuplication_obj = (arr) => {
@@ -66,15 +67,15 @@ function deDuplication_reduce(arr) {
 // log(deDuplication_reduce(arr));
 // 7 splice
 function deDuplication_splice(arr) {
-    for (let i = 0; i < arr.length; i++) {
-        for (let j = i + 1; j < arr.length; j++) {
-            if (Object.is(arr[i], arr[j])) {
-                arr.splice(j, 1);
-                j--;
-            }
-        }
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      if (Object.is(arr[i], arr[j])) {
+        arr.splice(j, 1);
+        j--;
+      }
     }
-    return arr;
+  }
+  return arr;
 }
 
-log(deDuplication_splice(arr))
+// log(deDuplication_splice(arr))
