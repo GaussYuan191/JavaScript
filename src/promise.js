@@ -97,13 +97,15 @@ class Commitment {
   }
 }
 function resolveCommitment(commitment2, x, resolve, reject) {
+  // 判断x是不是promise
   if (x === commitment2) {
+    // 不能自己等自己完成
     return reject(new TypeError("chaning cycle detected for commitment"));
   }
   let called;
   if (x != null && (typeof x === "object" || typeof x === "function")) {
     try {
-      let then = x.then;
+      let then = x.then;  // 防止取then 出现问题
       if (typeof then === "function") {
         then.call(
           x,
@@ -265,3 +267,15 @@ Promise.newAllSetlled = (commitList) => {
   })
 }
 Promise.newAllSetlled(commitList).then(res=>console.log(res))
+
+Promise.mergePromise = (promises) => {
+  const data = [];
+  let promise = Promise.resolve();
+  promises.forEach(item => {
+    promise = promise.then(item).then(res => {
+      data.push(res);
+      return data; // 把每次的结果返回
+    })
+  })
+  return promise;
+}
