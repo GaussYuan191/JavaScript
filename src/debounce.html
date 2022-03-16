@@ -9,17 +9,18 @@
   <body>
     <input type="text" class="box" />
     <script>
-      //   function debounce(fn, time) {
-      //     let timer = null;
-      //     return function (...args) {
-      //       if (timer) {
-      //         clearTimeout(timer);
-      //       }
-      //       timer = setTimeout(() => {
-      //         fn.apply(this, args);
-      //       }, time);
-      //     };
-      //   }
+        // function debounce(fn, time) {
+        //   let timer = null;
+        //   return function (...args) {
+        //     if (timer) {
+        //       clearTimeout(timer);
+        //     }
+        //     timer = setTimeout(() => {
+        //       fn.apply(this, args);
+        //     }, time);
+        //     console.log(timer)
+        //   };
+        // }
       // 第一次执行
       function debounce(fn, time, flag = true) {
         let timer = null;
@@ -35,6 +36,7 @@
           timer = setTimeout(() => {
             fn.apply(this, args);
           }, time);
+          console.log(timer)
         };
       }
       const box = document.querySelector(".box");
