@@ -13,7 +13,7 @@ function Child(like) {
 }
 // 1.原型链继承
 Child.prototype = new Parent(); //核心
-Child.prototype.constructor = Child; // 修正constructor指向
+// Child.prototype.constructor = Child; // 修正constructor指向
 let boy1 = new Child();
 let boy2 = new Child();
 // 优点：共享了父类构造函数的say方法
@@ -26,4 +26,5 @@ console.log(boy1.name, boy2.name, boy1.name == boy2.name);
 boy1.arr.push(2);
 console.log(boy2.arr); // 注意修改boy1的name，boy2的name不影响
 //注意要修改child类实例的constructor的指向
+console.log(Child.prototype.constructor);
 console.log(Child.prototype.__proto__ === Parent.prototype);
