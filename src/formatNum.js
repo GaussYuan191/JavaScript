@@ -14,5 +14,10 @@ function format_with_array(number) {
   }, "");
   return res + (arr[1] ? "." + arr[1] : '');
 }
+// 正则
+function format_with_reg(number) {
+   let [integer, decimal = ''] = number.toString().split('.');
+   return integer.replace(/\d{1,3}(?=((\d{3})+$))/g, '$&,') + (decimal ? '.' + decimal : '');
+}
 
-console.log(format_with_array(11223345.12234));
+console.log(format_with_reg(1145223.124545));
