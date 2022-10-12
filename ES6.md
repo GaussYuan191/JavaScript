@@ -75,7 +75,7 @@ function bar(x = y, y = 2) {
 bar(); // 报错
 ```
 
-应为函数也有自己的作用域，x和y是参数，形参不是变量，也不会提升成全局变量，执行 x = y 时 y没有定义 则会发生"死区"问题
+因为函数也有自己的作用域，x和y是参数，形参不是变量，也不会提升成全局变量，执行 x = y 时 y没有定义 则会发生"死区"问题
 
 ```js
 // 修改
@@ -367,7 +367,9 @@ e // "o"
 ```js
 let {toString: s} = 123;
 s === Number.prototype.toString // true
-
+// s取的是123这个对象上的toString方法
+let {a: s} = {a: 12312}
+console.log(s) //12312
 let {toString: s} = true;
 s === Boolean.prototype.toString // true
 ```
@@ -2062,7 +2064,8 @@ ES6 一共有 5 种方法可以遍历对象的属性。
 
 `Object.getOwnPropertySymbols`返回一个数组，包含对象自身的所有 Symbol 属性的键名。
 
-**（5）Reflect.ownKeys(obj)**
+**（5）
+441 
 
 `Reflect.ownKeys`返回一个数组，包含对象自身的（不含继承的）所有键名，不管键名是 Symbol 或字符串，也不管是否可枚举。
 
