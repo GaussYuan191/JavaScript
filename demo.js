@@ -1,8 +1,18 @@
-var a = {
-  n: 1,
-  valueOf() {
-    return this.n++;
+function runAsync(x) {
+  const p = new Promise((r) => setTimeout(() => r(x, console.log(x)), 1000));
+  return p;
+}
+function runReject(x) {
+  const p = new Promise((res, err) =>
+    setTimeout(() => err(`Error: ${x}`, console.log(x)), 1000 * x)
+  );
+  return p;
+}
+Promise.all([runAsync(1), runReject(4), runAsync(3), runReject(2)]).then(
+  (res) => {
+    console.log(res);
   },
-};
-
-console.log(a == 1 && a == 2 && a == 3);
+  (err) => {
+    console.log("error11", err);
+  }
+);
