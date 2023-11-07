@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .heart {
+        position: relative;
+        width: 100px;
+        height: 90px;
+        transform: rotate(45deg);
+        /* animation: beat 1s ease-in-out infinite; */
+      }
+      .heart-inner {
+        position: absolute;
+        background-color: red;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        border-radius: 50% 50% 0 0;
+        transform: scale(0.7);
+      }
+      .heart-inner2 {
+        transform: rotate(135deg);
+      }
+      @keyframes beat {
+        0% {
+          transform: scale(0.7) rotate(45deg);
+        }
+        50% {
+          transform: scale(1) rotate(45deg);
+        }
+        100% {
+          transform: scale(0.7) rotate(45deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="heart">
+      <div class="heart-inner"></div>
+      <div class="heart-inner heart-inner2"></div>
+    </div>
+
+    <script>
+      // function demo() {
+      //   console.log("我是第三个")
+      // }
+      class Map {
+        constructor() {
+          // 实现自定义的 Map 类逻辑
+        }
+
+        // 其他方法和属性
+      }
+    </script>
+    <script src="./s2.js"></script>
+    <script src="./s1.js"></script>
+  </body>
+</html>

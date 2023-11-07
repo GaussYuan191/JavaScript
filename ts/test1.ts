@@ -5,6 +5,8 @@
 //   BLUE,
 // }
 
+import { type } from "os";
+
 // const color: Color[] = [Color.RED, Color.PICK, Color.BLUE];
 // console.log("color", color);
 
@@ -53,6 +55,52 @@
 //   age: 12,
 //   gender: "男",
 // };
+interface IPerson<T1=string, T2=number> {
+  name: T1;
+  age: T2
+}
+
+type IPerson1 = IPerson
+let p: IPerson1<number, string> = {
+  name: 1,
+  age: 'aa'
+}
+
+interface IpersonA {
+  name?: string;
+  age: number;
+}
+interface IpersonB extends IpersonA {
+  name: string;
+  gender: string;
+}
+ 
+let person:  IpersonB = {
+  name: "事业",
+  age: 12,
+  gender: "男",
+};
+export type Equals<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2 ? true : false;
+const a: Equals<IpersonA, IpersonB> = false;
+
+interface base {
+  title: string
+}
+const 
+interface selfBase extends base {
+  colSpan: string
+}
+
+interface base2 {
+  name: string
+  columns: base
+}
+
+interface selfBase2 extends base2 {
+  key: string,
+
+}
+
 // 类型守卫，在运行时检查，确保一个值在所要求的类型中
 // in,typeof(只支持基础类型),instanceof,自定义类型
 // 接口-对象的状态(属性)和行为(方法)的抽象(描述)
@@ -128,3 +176,16 @@
 //     age: 1
 // }
 
+// function sayHello(name: string) {
+//     let sname:string = name
+//     console.log("sname", sname)
+// }
+
+// sayHello(undefined)
+
+interface demo {
+  name?: boolean;
+  [propsName: string]: any;
+}
+
+const obj:demo = {name: 1}
