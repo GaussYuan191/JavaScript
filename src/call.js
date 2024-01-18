@@ -8,6 +8,7 @@ Function.prototype.myCall = function (thisArg, ...args) {
   // 没有没有传入对象，就挂载在全局对象上
   if (thisArg === undefined || thisArg === null) {
     thisArg = globalThis;
+    console.log('gal',globalThis)
   } else {
     // 把参数转成对象
     thisArg = Object(thisArg);
