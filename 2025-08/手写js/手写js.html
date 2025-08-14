@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      // 1.Object.create 创建一个对象 将传入的对象作为原型new一个新对象
+      // function my_ObjectCreate(obj) {
+      //   function F() {}
+      //   F.prototype = obj;
+      //   return new F();
+      // }
+      // console.log("my_ObjectCreate", my_ObjectCreate({ name: "1", age: 2 }));
+      // 2.instanceof 通过原型链判断类型
+      // function my_instanceof(leftSide, rightSide) {
+      //   // 左侧为普通变量 返回false
+      //   if ((typeof leftSide !== 'function' && typeof rightSide !== 'object') || rightSide === null) {
+      //     return false
+      //   }
+      //   // 如果右侧有自定义的 [Symbol.hasInstance] 方法，则调用它
+      //   if(rightSide[Symbol.hasInstance]) {
+      //     return rightSide[Symbol.hasInstance].call(rightSide, leftSide)
+      //   }
+      //   // 右侧应该是个函数
+      //   if (typeof rightSide !== 'function') {
+      //     throw new TypeError('Right-hand side of instanceof is not callable')
+      //   }
+      //   // 右侧不为普通对象
+      //   if (
+      //     (typeof rightSide !== "function" && typeof rightSide !== "object") ||
+      //     rightSide === null
+      //   ) {
+      //     throw new TypeError(
+      //       "Right-hand side of instanceof is not an object"
+      //     );
+      //   }
+      //   const rightPrototype = rightSide.prototype;
+      //   let proto = Object.getPrototypeOf(leftSide)
+      //   while (proto) {
+      //     if (proto === rightPrototype) {
+      //       return true;
+      //     }
+      //     proto = Object.getPrototypeOf(proto)
+      //   }
+      //   return false;
+      // }
+      // console.log("my_instanceof", my_instanceof([1, 2], Object));
+      // 3.手写new
+      function my_new(constructor, ...args) {
+        // constructor 必须是一个函数
+        if (typeof constructor !== "function") {
+          throw TypeError(`${constructor} is not a function`);
+        }
+        // 创建一个对象
+        const instance = Object.create(constructor.prototype);
+        // 改变this的指向
+        const result = constructor.apply(instance, args);
+        // 如果result是对象则直接返回 不是返回新创建的对象
+        console.log(args, result, instance);
+        return result instanceof Object ? result : instance;
+      }
+      console.log(my_new(Object, { name: 1 }));
+    </script>
+  </body>
+</html>
